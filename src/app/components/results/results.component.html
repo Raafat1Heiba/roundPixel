@@ -1,0 +1,13 @@
+<div *ngIf="displayedFlights(); else noFlights">
+  <section class="cards-container">
+    <app-flight-card
+      *ngFor="let flight of displayedFlights()"
+      [flight]="flight"
+    ></app-flight-card>
+  </section>
+  <app-side-bar></app-side-bar>
+</div>
+
+<ng-template #noFlights>
+  <p>No flights available.</p>
+</ng-template>

@@ -1,0 +1,99 @@
+<div class="side-bar" [class.open]="isOpened">
+  <form [formGroup]="filterForm">
+    <div class="filters-container">
+      <div class="filter">
+        <div class="filter-header" (click)="toggleFilter('airlines')">
+          <span> Airlines</span>
+        </div>
+        <div
+          class="filter-body"
+          [style.display]="activeFilters ? 'block' : 'none'"
+        >
+          <input
+            type="text"
+            placeholder="Search Airlines"
+            class="filter-input"
+            formControlName="airLines"
+            (input)="allowOnlyEnglish($event)"
+            (input)="filterByAirline($event)"
+          />
+        </div>
+      </div>
+
+      <div class="filter">
+        <div class="filter-header" (click)="toggleFilter('price')">
+          <span> Price</span>
+        </div>
+        <div
+          class="filter-body"
+          [style.display]="activeFilters ? 'block' : 'none'"
+        >
+          <div class="price-slider">
+            <span class="price-value">{{ minPrice }}</span>
+            <input
+              type="range"
+              [min]="minPrice"
+              [max]="maxPrice"
+              [step]="1"
+              (input)="filterByPrice(currentPrice, maxPrice)"
+              formControlName="price"
+              [(ngModel)]="currentPrice"
+            />
+            <span class="price-value">{{ currentPrice }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter" formArrayName="stopes">
+        <div
+          class="filter-header"
+          (click)="toggleFilter('stops')"
+          (click)="filterByStops()"
+        >
+          <span> Stops</span>
+        </div>
+        <div
+          class="filter-body"
+          [style.display]="activeFilters ? 'block' : 'none'"
+        >
+          <label>
+            <input type="checkbox" formControlName="0" />
+            Direct
+          </label>
+          <label>
+            <input type="checkbox" formControlName="1" />
+            Transit
+          </label>
+        </div>
+      </div>
+
+      <div class="filter">
+        <div
+          class="filter-header"
+          (click)="toggleFilter('refundable')"
+          (click)="filterByRefundability()"
+        >
+          <span> Refundable</span>
+        </div>
+        <div class="filter-body">
+          <label>Refundability:</label>
+          <select formControlName="refund">
+            <option value="both">Both</option>
+            <option value="Refundable Flights">Refundable</option>
+            <option value="Non Refundable Flights">Non-Refundable</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="main-content">
+  <button class="menu-btn" (click)="toggleSidebar()" style="position: fixed">
+    ☰
+  </button>
+</div>
+
+<div class="no-results-overlay" *ngIf="noResultsMessage">
+  <div class="no-results-message">{{ noResultsMessage }}</div>
+</div>

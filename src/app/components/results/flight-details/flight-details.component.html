@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="flight-details-card">
+    <div class="header">
+      <img
+        src="{{ card.airlineLogo }}"
+        alt="{{ card.airlineCode }}"
+        class="logo"
+      />
+      <div class="flight-info">
+        <h2>{{ card.airlineName }}</h2>
+        <p>AirLine code</p>
+        <p>{{ card.airlineCode }}</p>
+        <p>Flight number</p>
+        <p>{{ card.flightNumber }}</p>
+        <p>
+          <strong>{{ card.isRefundable }}</strong>
+        </p>
+      </div>
+    </div>
+    <div class="flight-route">
+      <div class="location">
+        <h1>{{ card.departureAirportCode }}</h1>
+        <p>{{ card.deptDate | date : "EEE, d MMM  h:mm a" }}</p>
+        <p>{{ card.airlineCode }}</p>
+      </div>
+      <div class="duration">
+        {{ flight()?.allJourney?.flights?.[0]?.flightDTO?.[0]?.landTime }}
+        <div class="icon">
+          <span>✈️</span>
+        </div>
+        <p>{{ card.totalDuration | duration }}</p>
+      </div>
+      <div class="location">
+        <h1>{{ card.arrivalAirportCode }}</h1>
+        <p>{{ card.arrivalDate | date : "EEE, d MMM  h:mm a" }}</p>
+        <p>Kuwait International Airport</p>
+      </div>
+    </div>
+    <div class="pricing">
+      <h3>EGP {{ card.price }}</h3>
+      <p>Per person</p>
+    </div>
+    <div class="passenger-info">
+      <div>
+        <p>Class</p>
+        <h3>Economy</h3>
+      </div>
+      <div>
+        <p>Flight</p>
+        <h3>{{ card.airlineCode }}</h3>
+      </div>
+    </div>
+    <div class="notes">
+      <h4>Note:</h4>
+      <ul>
+        <li>
+          The add-on service charges, convenience fee, and the discount you have
+          received using a coupon code are non-refundable.
+        </li>
+        <li>
+          Airlines stop accepting cancellation/change requests 4 - 72 hours
+          before flight departure, depending on the airline. The airline fee is
+          based on an automated interpretation of airline fare rules. Rehlat
+          doesn't guarantee the accuracy of this information.
+        </li>
+        <li>
+          The change/cancellation fee may also vary based on fluctuations in
+          currency conversion rates. For the exact cancellation/change fee,
+          please call us at our customer care number.
+        </li>
+      </ul>
+    </div>
+    <div class="barcode">
+      <button
+        class="book-button"
+        (click)="bookTicket()"
+        [disabled]="bookingInProgress"
+      >
+        Book Your Ticket
+      </button>
+      <button class="home-button" routerLink="/results">Back To Home</button>
+
+      <div *ngIf="bookingSuccessMessage" class="success-message">
+        {{ bookingSuccessMessage }}
+      </div>
+    </div>
+  </div>
+</div>

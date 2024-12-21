@@ -1,0 +1,71 @@
+.full-page {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10%;
+  overflow: hidden;
+  position: relative;
+}
+
+.full-page::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  animation: moveBackground 5s infinite alternate;
+  z-index: 0;
+}
+
+@keyframes moveBackground {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
+.text-container {
+  margin-top: 70px;
+}
+
+.content {
+  z-index: 1;
+  text-align: center;
+}
+
+.logo-text {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+button {
+  margin-top: 150px;
+  padding: 10px 25px;
+  font-size: 30px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+}
+
+button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+  transform: translateY(-5px);
+}
